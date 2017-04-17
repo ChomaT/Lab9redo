@@ -53,7 +53,6 @@ message::message(string input){
 
 
 message::~message(){
-    //cout << "\nBase Destructor" << endl;
 }
 
 
@@ -90,7 +89,6 @@ morseCodeMessage::morseCodeMessage(string input) : message(input){
 
 
 morseCodeMessage::~morseCodeMessage(){
-    //cout << "\nMorse Destructor" << endl;
 }
 
 
@@ -219,7 +217,6 @@ class messageStack{
 
 messageStack::messageStack(message init){
     //cout<<"stack constructor"<<endl;
-    //ptrstack[0] = new message(init);
     ptrstack[0] = &init;
     numobj= 1;
     stack_top = 1;
@@ -227,25 +224,21 @@ messageStack::messageStack(message init){
 
 
 messageStack::~messageStack(){
-    //cout << "\nStack Destructor" << endl;
-    for(int i = 0; i < numobj; i++)
-    {
-        delete ptrstack[i];
-    }
+    //for(int i = 0; i < numobj; i++)
+    //{
+    //     delete ptrstack;
+    //}
 }
 
 
 void messageStack::push(message* current_obj){
-   // current_obj->print();
     ptrstack[stack_top] = current_obj;
-   // ptrstack[stack_top]->print();
     numobj++;
     stack_top++;
 }
 
 
 void messageStack::pop(){
-    //cout<<"begin popping"<<endl;
     delete ptrstack[stack_top-1];
     stack_top--;
     numobj--;
@@ -254,7 +247,6 @@ void messageStack::pop(){
 
 void messageStack::printStack(){
     //print all messages from top to bottom of stack
-    //cout<<"print stack fn"<< endl;
     for(int i = 0; i < numobj; i++)
     {
         cout<<"Message no. " << i <<endl;
@@ -268,25 +260,22 @@ void messageStack::printStack(){
 
 int main(int argc, char** argv) {
     message msg1("test message");
-       // msg1.print();
-    morseCodeMessage msg2("Test morseCodeMessage");
-       // msg2.print();
-        //msg2.MorseCodeToLights();
+    morseCodeMessage msg2("TEST message");
+    	msg2.MorseCodeToLights();
     message msg3("Test2 message");
-      //  msg3.print();
-    cout<<endl;
+    cout<<endl<<endl;
 
 
     messageStack stack(msg1);
     stack.push(&msg2);
     stack.push(&msg3);
     stack.printStack();
+    cout<<endl<<endl;
 
     stack.pop();
-    cout<<endl;
-
     stack.printStack();
     cout<<endl<<"exit"<<endl;
 
     return 0;
 }
+
